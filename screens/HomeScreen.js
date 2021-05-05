@@ -12,6 +12,12 @@ import { Avatar, ListItem } from "react-native-elements";
 import CustomListItem from "../components/CustomListItem";
 
 const HomeScreen = ({ navigation }) => {
+  const signOutUser = () => {
+    auth.signOut().then(() => {
+      navigation.replace("Login");
+    });
+  };
+
   useLayoutEffect(() => {
     navigation.setOptions({
       title: "Signal",
@@ -20,7 +26,7 @@ const HomeScreen = ({ navigation }) => {
       headerTintColor: "black",
       headerLeft: () => (
         <View style={{ marginLeft: 20 }}>
-          <TouchableOpacity>
+          <TouchableOpacity activeOpacity={0.5} onPress={signOutUser}>
             <Avatar rounded source={{ uri: auth?.currentUser?.photoURL }} />
           </TouchableOpacity>
         </View>
