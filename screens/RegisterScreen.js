@@ -8,13 +8,13 @@ const RegisterScreen = ({ navigation }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
+  const [photoURL, setPhotoURL] = useState("");
 
   const register = () => {
     auth
       .createUserWithEmailAndPassword(email, password)
       .then((authUser) => {
-        authUser.user.update({
+        authUser.user.updateProfile({
           displayName: name,
           photoURL:
             photoURL ||
@@ -60,8 +60,8 @@ const RegisterScreen = ({ navigation }) => {
           placeholder="Profile picture URL (optional)"
           autofocus
           type="text"
-          value={imageUrl}
-          onChangeText={(text) => setImageUrl(text)}
+          value={photoURL}
+          onChangeText={(text) => setPhotoURL(text)}
           onSubmitEditing={register}
         />
       </View>
