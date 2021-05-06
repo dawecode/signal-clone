@@ -7,6 +7,7 @@ import "react-native-gesture-handler";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import HomeScreen from "./screens/HomeScreen";
+import addChatScreen from "./screens/addChatScreen";
 
 const Stack = createStackNavigator();
 const globalScreenOptions = {
@@ -22,6 +23,7 @@ export default function App() {
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Register" component={RegisterScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="AddChat" component={addChatScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
