@@ -1,5 +1,5 @@
-import { auth } from "../firebase";
-import React, { useLayoutEffect } from "react";
+import { auth, db } from "../firebase";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import {
   StyleSheet,
   ScrollView,
@@ -13,11 +13,23 @@ import CustomListItem from "../components/CustomListItem";
 import { AntDesign, SimpleLineIcons } from "@expo/vector-icons";
 
 const HomeScreen = ({ navigation }) => {
+  const [chats, setChats] = useState([]);
   const signOutUser = () => {
     auth.signOut().then(() => {
       navigation.replace("Login");
     });
   };
+  useEffect(() => {
+    const unsubscribe = db.collection("chats").onSnapshot((snapshot) =>
+      setChats(
+        snapshot.docs.map((doc) => ({
+          id: doc.id,
+          data: doc.data(),
+        }))
+      )
+    );
+    return unsubscribe;
+  }, []);
 
   useLayoutEffect(() => {
     navigation.setOptions({
